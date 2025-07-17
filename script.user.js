@@ -4,7 +4,7 @@
 // @description Add a button to open step function execution from odoo helpdesk description.
 // @author      Prince Biswaranjan
 // @homepage    https://github.com/prince-biswaranjan/odoo-open-step-function-execution
-// @version     1.0.3
+// @version     1.0.4
 // @grant       none
 // @updateURL   https://raw.githubusercontent.com/prince-biswaranjan/odoo-open-step-function-execution/refs/heads/main/script.user.js
 // @downloadURL https://raw.githubusercontent.com/prince-biswaranjan/odoo-open-step-function-execution/refs/heads/main/script.user.js
@@ -14,11 +14,10 @@
 
 "use strict";
 
-function addButton(text, onclick, cssObj, buttonParent) {
+function addButton(text, onclick, cssObj) {
     cssObj = cssObj || {position: 'absolute', top: '7%', left:'4%', 'z-index': 3};
     let button = document.createElement('button'), btnStyle = button.style;
-    // document.body.appendChild(button);
-    buttonParent.appendChild(button);
+    document.body.appendChild(button);
     
     button.innerHTML = text;
     button.onclick = onclick;
@@ -34,13 +33,13 @@ function addButton(text, onclick, cssObj, buttonParent) {
 window.addEventListener('load', () => {
     let cssProp = {
         position: 'fixed', 
-        top: '6%', 
-        right:'1%', 
+        top: '1%', 
+        right:'20%', 
         'z-index': 10,
         'background-color': 'red'
     };
-    var buttonParent = document.getElementsByClassName("o_form_statusbar")[0];
-    addButton('Open in AWS Console', openStepFunctionExecution, cssProp, buttonParent);
+    
+    addButton('Open in AWS Console', openStepFunctionExecution, cssProp);
 });
 
 function openStepFunctionExecution(){
