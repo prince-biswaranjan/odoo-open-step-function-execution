@@ -7,6 +7,9 @@
 // @version     1.0.0
 // @grant       none
 // @include     *
+// @match       https://portal.linkfields.com/web#id=*&menu_id=121&cids=1&action=189&active_id=8&model=helpdesk.ticket&view_type=form
+// @updateURL    https://raw.githubusercontent.com/prince-biswaranjan/odoo-open-step-function-execution/refs/heads/main/script.user.js
+// @downloadURL  https://raw.githubusercontent.com/prince-biswaranjan/odoo-open-step-function-execution/refs/heads/main/script.user.js
 // @run-at      document-end
 // ==/UserScript==
 
@@ -36,9 +39,17 @@ window.addEventListener('load', () => {
         'z-index': 10,
         'background-color': 'red'
     };
-    addButton('Remove Future Tasks', dummy, cssProp);
+    addButton('Open in AWS Console', openStepFunctionExecution, cssProp);
 });
 
-function dummy(){
+function openStepFunctionExecution(){
+    var description = document.getElementById("description");
+    var descriptionText = description.innerText;
 
+    var failedEvent = JSON.parse(descriptionText);
+    var executionId = failedEvent.Execution.Id;
+
+    var stepFunctionExecutionUrl = `https://eu-west-2.console.aws.amazon.com/states/home?region=eu-west-2#/v2/executions/details/${executionId}`;
+
+    window.open(stepFunctionExecutionUrl, '_blank');
 }
