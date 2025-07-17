@@ -4,8 +4,9 @@
 // @description Add a button to open step function execution from odoo helpdesk description.
 // @author      Prince Biswaranjan
 // @homepage    https://github.com/prince-biswaranjan/odoo-open-step-function-execution
-// @version     1.0.4
+// @version     1.0.5
 // @grant       none
+// @include     https://portal.linkfields.com/web*
 // @updateURL   https://raw.githubusercontent.com/prince-biswaranjan/odoo-open-step-function-execution/refs/heads/main/script.user.js
 // @downloadURL https://raw.githubusercontent.com/prince-biswaranjan/odoo-open-step-function-execution/refs/heads/main/script.user.js
 // @run-at      document-end
