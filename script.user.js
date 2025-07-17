@@ -4,13 +4,13 @@
 // @description Add a button to open step function execution from odoo helpdesk description.
 // @author      Prince Biswaranjan
 // @homepage    https://github.com/prince-biswaranjan/odoo-open-step-function-execution
-// @version     1.0.1
+// @version     1.0.2
 // @grant       none
-// @match       https://portal.linkfields.com/web#id=*&menu_id=121&cids=1&action=189&active_id=8&model=helpdesk.ticket&view_type=form
 // @updateURL   https://raw.githubusercontent.com/prince-biswaranjan/odoo-open-step-function-execution/refs/heads/main/script.user.js
 // @downloadURL https://raw.githubusercontent.com/prince-biswaranjan/odoo-open-step-function-execution/refs/heads/main/script.user.js
 // @run-at      document-end
 // ==/UserScript==
+
 
 "use strict";
 
