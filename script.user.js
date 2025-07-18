@@ -4,7 +4,7 @@
 // @description Add a button to open step function execution from odoo helpdesk description.
 // @author      Prince Biswaranjan
 // @homepage    https://github.com/prince-biswaranjan/odoo-open-step-function-execution
-// @version     2.0.0
+// @version     2.0.1
 // @grant       none
 // @include     https://portal.linkfields.com/web*
 // @updateURL   https://raw.githubusercontent.com/prince-biswaranjan/odoo-open-step-function-execution/refs/heads/main/script.user.js
@@ -20,10 +20,9 @@ const BUTTON_ID = "open-in-aws-console-btn";
 
 function addButton(text, onclick) {
     if (document.getElementById(BUTTON_ID)) {
-        console.log("Button already exists, skipping injection.");
         return;
     }
-    console.log("adding button");
+
     let button = document.createElement('button');
 
     button.id = BUTTON_ID
