@@ -4,7 +4,7 @@
 // @description Add a button to open step function execution from odoo helpdesk description.
 // @author      Prince Biswaranjan
 // @homepage    https://github.com/prince-biswaranjan/odoo-open-step-function-execution
-// @version     1.0.5
+// @version     2.0.0
 // @grant       none
 // @include     https://portal.linkfields.com/web*
 // @updateURL   https://raw.githubusercontent.com/prince-biswaranjan/odoo-open-step-function-execution/refs/heads/main/script.user.js
@@ -15,32 +15,58 @@
 
 "use strict";
 
-function addButton(text, onclick, cssObj) {
-    cssObj = cssObj || {position: 'absolute', top: '7%', left:'4%', 'z-index': 3};
-    let button = document.createElement('button'), btnStyle = button.style;
-    document.body.appendChild(button);
-    
+const TARGET_TITLE = "OneClickApiFailure-prod";
+const BUTTON_ID = "open-in-aws-console-btn";
+
+function addButton(text, onclick) {
+    if (document.getElementById(BUTTON_ID)) {
+        console.log("Button already exists, skipping injection.");
+        return;
+    }
+    console.log("adding button");
+    let button = document.createElement('button');
+
+    button.id = BUTTON_ID
     button.innerHTML = text;
     button.onclick = onclick;
-    btnStyle.position = 'absolute';
-    
-    Object.keys(cssObj).forEach(key => {
-        btnStyle[key] = cssObj[key];
+    button.style.backgroundColor = 'red';
+
+    var description = document.getElementById("description");
+    description.parentElement.insertBefore(button, description);
+}
+
+function removeButton() {
+    const button = document.getElementById(BUTTON_ID);
+    if(button) {
+        button.remove();
+    }
+}
+
+// Main observer logic
+function observeTitleChanges() {
+    const targetNode = document.body;
+
+    const observer = new MutationObserver(() => {
+        setTimeout(() => {
+            const titleElem = document.getElementById("name");
+            const titleText = titleElem?.value?.trim();
+
+            if (titleText === TARGET_TITLE) {
+                addButton("Open in AWS Console", openStepFunctionExecution);
+            } else {
+                removeButton();
+            }
+        }, 300);
     });
-    
-    return button;
+
+    observer.observe(targetNode, {
+        childList: true,
+        subtree: true
+    });
 }
 
 window.addEventListener('load', () => {
-    let cssProp = {
-        position: 'fixed', 
-        top: '1%', 
-        right:'20%', 
-        'z-index': 10,
-        'background-color': 'red'
-    };
-    
-    addButton('Open in AWS Console', openStepFunctionExecution, cssProp);
+    observeTitleChanges();
 });
 
 function openStepFunctionExecution(){
